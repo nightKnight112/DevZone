@@ -71,6 +71,9 @@ public class User {
     @Column
     private Integer rating;
 
+    @Column
+    private String profileUrls;
+
     @OneToMany(mappedBy = "users")
     private List<Follows> follows;
 

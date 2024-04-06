@@ -29,7 +29,7 @@ public class UserController {
         return userService.fetchAllUser();
     }
 
-    @PostMapping("/save-new-user/")
+    @PostMapping("/save-new-user")
     public String saveNewUser(@Validated @RequestBody User user){
         return userService.saveNewUser(user);
     }

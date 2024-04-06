@@ -32,8 +32,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> fetchAllUser(){
-        List<User> allUserList = userRepo.findAll();
-        return allUserList;
+        return userRepo.findAll();
     }
 
     @Override
@@ -43,11 +42,35 @@ public class UserServiceImpl implements UserService {
             throw new IllegalArgumentException("User Does not exist");
         }else{
             User tempUser = userExists.get();
-            if(Objects.nonNull(user.getUserName()) && tempUser.getUserName().equalsIgnoreCase(user.getUserName())){
+            if(Objects.nonNull(user.getUserName())){
                 tempUser.setUserName(user.getUserName());
             }
-            if(Objects.nonNull(user.getUserId()) && tempUser.getUserId().equals(user.getUserId())){
+            if(Objects.nonNull(user.getUserId())){
                 tempUser.setUserId(user.getUserId());
+            }
+            if(Objects.nonNull(user.getEmail())){
+                tempUser.setEmail(user.getEmail());
+            }
+            if(Objects.nonNull(user.getPassword())){
+                tempUser.setPassword(user.getPassword());
+            }
+            if(Objects.nonNull(user.getProfileUrls())){
+                tempUser.setProfileUrls(user.getProfileUrls());
+            }
+            if(Objects.nonNull(user.getActiveCount())){
+                tempUser.setActiveCount(user.getActiveCount());
+            }
+            if(Objects.nonNull(user.getRating())){
+                tempUser.setRating(user.getRating());
+            }
+            if(Objects.nonNull(user.getStatus())){
+                tempUser.setStatus(user.getStatus());
+            }
+            if(Objects.nonNull(user.getRole())){
+                tempUser.setRole(user.getRole());
+            }
+            if(Objects.nonNull(user.getKudosEarned())){
+                tempUser.setKudosEarned(user.getKudosEarned());
             }
             User updatedUser = userRepo.save(tempUser);
         }
@@ -56,9 +79,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String deleteUserById(Integer id) {
-
-        this.userRepo.deleteById(id);
-        return "user deleted successfully";
+        try {
+            this.userRepo.deleteById(id);
+            return "user deleted successfully";
+        }catch (Exception e) {
+            return "Cannot delete user";
+        }
     }
 
     @Override

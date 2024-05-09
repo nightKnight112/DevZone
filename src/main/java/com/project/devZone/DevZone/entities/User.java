@@ -39,6 +39,7 @@ public class User {
 
     @Email(message="Please enter valid email")
     @Column(unique=true)
+    @NotEmpty
     private String email;
 
     @Length(min = 10, message="phone number must be 10 digits")
